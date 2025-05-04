@@ -1,71 +1,77 @@
-public class ReaderWriter {
-    static int readerCount = 0;
-    static final Object lock = new Object();
+import java.util.concurrent.Semaphore;
 
-    static class Reader implements Runnable {
-        @Override
+class ReaderWriter {
+    static int readCount = 0;
+    static Semaphore mutex = new Semaphore(1);
+    static Semaphore db = new Semaphore(1);
+
+    static class Reader extends Thread {
+        int readerId;
+
+        Reader(int id) {
+            this.readerId = id;
+        }
+
         public void run() {
-            synchronized (lock) {
-                readerCount++;
-                System.out.println(Thread.currentThread().getName() + " starts reading. Readers: " + readerCount);
-            }
-
-            // Simulate reading
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                while (true) {
+                    mutex.acquire();
+                    readCount++;
+                    if (readCount == 1)
+                        db.acquire();
+                    mutex.release();
 
-            synchronized (lock) {
-                System.out.println(Thread.currentThread().getName() + " stops reading.");
-                readerCount--;
-                if (readerCount == 0) {
-                    lock.notifyAll(); // Notify writers
+                    System.out.println("Reader " + readerId + " is reading.");
+                    Thread.sleep(500);
+
+                    mutex.acquire();
+                    readCount--;
+                    if (readCount == 0)
+                        db.release();
+                    mutex.release();
+
+                    System.out.println("Reader " + readerId + " has finished reading.");
+                    Thread.sleep(1000);
                 }
+            } catch (InterruptedException e) {
+                System.out.println("Reader " + readerId + " interrupted.");
             }
         }
     }
 
-    static class Writer implements Runnable {
-        @Override
+    static class Writer extends Thread {
+        int writerId;
+
+        Writer(int id) {
+            this.writerId = id;
+        }
+
         public void run() {
-            synchronized (lock) {
-                while (readerCount > 0) {
-                    try {
-                        lock.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                System.out.println(Thread.currentThread().getName() + " starts writing.");
-            }
-
-            // Simulate writing
             try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+                while (true) {
+                    db.acquire();
 
-            synchronized (lock) {
-                System.out.println(Thread.currentThread().getName() + " stops writing.");
-                lock.notifyAll(); // Notify readers or writers
+                    System.out.println("Writer " + writerId + " is writing.");
+                    Thread.sleep(1000);
+
+                    db.release();
+
+                    System.out.println("Writer " + writerId + " has finished writing.");
+                    Thread.sleep(2000);
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Writer " + writerId + " interrupted.");
             }
         }
     }
 
     public static void main(String[] args) {
-        Thread r1 = new Thread(new Reader(), "Reader-1");
-        Thread r2 = new Thread(new Reader(), "Reader-2");
-        Thread w1 = new Thread(new Writer(), "Writer-1");
-        Thread r3 = new Thread(new Reader(), "Reader-3");
-        Thread w2 = new Thread(new Writer(), "Writer-2");
+        for (int i = 1; i <= 3; i++) {
+            new Reader(i).start();
+        }
 
-        r1.start();
-        r2.start();
-        w1.start();
-        r3.start();
-        w2.start();
+        for (int i = 1; i <= 2; i++) {
+            new Writer(i).start();
+        }
     }
 }

@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class BankersAlgo
 {
     static int P = 5;
