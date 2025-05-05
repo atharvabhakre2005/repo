@@ -20,7 +20,7 @@ public class FCFS {
             new Process(3, 6, 6)
         };
 
-        Arrays.sort(processes, (p1, p2) -> p1.at - p2.at); // Sort by arrival time
+        Arrays.sort(processes, (p1, p2) -> p1.at - p2.at); 
 
         int n = processes.length;
         int currentTime = 0;

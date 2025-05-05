@@ -21,17 +21,17 @@ public class producerConsumer {
             int item = 0;
             try {
                 while (true) {
-                    Thread.sleep(1000); // Simulate time to produce item
+                    Thread.sleep(1000);
                     item++;
 
-                    empty.acquire();   // Wait if buffer is full
-                    mutex.acquire();   // Enter critical section
+                    empty.acquire(); 
+                    mutex.acquire();   
 
-                    buffer.add(item);  // Place item in buffer
+                    buffer.add(item);  
                     System.out.println("Producer " + producerId + " produced: " + item);
 
-                    mutex.release();   // Exit critical section
-                    full.release();    // Increment number of full slots
+                    mutex.release();   
+                    full.release();    
                 }
             } catch (InterruptedException e) {
                 System.out.println("Producer " + producerId + " interrupted.");
@@ -49,16 +49,16 @@ public class producerConsumer {
         public void run() {
             try {
                 while (true) {
-                    full.acquire();    // Wait if buffer is empty
-                    mutex.acquire();   // Enter critical section
+                    full.acquire();    
+                    mutex.acquire();   
 
-                    int item = buffer.remove(); // Consume item
+                    int item = buffer.remove(); 
                     System.out.println("Consumer " + consumerId + " consumed: " + item);
 
-                    mutex.release();   // Exit critical section
-                    empty.release();   // Increment number of empty slots
+                    mutex.release();   
+                    empty.release();   
 
-                    Thread.sleep(1500); // Simulate time to consume item
+                    Thread.sleep(1500); 
                 }
             } catch (InterruptedException e) {
                 System.out.println("Consumer " + consumerId + " interrupted.");
@@ -67,12 +67,12 @@ public class producerConsumer {
     }
 
     public static void main(String[] args) {
-        // Start producers
+        
         for (int i = 1; i <= 2; i++) {
             new Producer(i).start();
         }
 
-        // Start consumers
+        
         for (int i = 1; i <= 2; i++) {
             new Consumer(i).start();
         }

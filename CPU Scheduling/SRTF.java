@@ -15,10 +15,10 @@ public class SRTF {
     public static void main(String[] args) {
         int n = 4;
         Process[] processes = {
-            new Process(1, 0, 8),
-            new Process(2, 1, 4),
-            new Process(3, 2, 9),
-            new Process(4, 3, 5)
+            new Process(1, 0, 5),
+            new Process(2, 1, 3),
+            new Process(3, 2, 4),
+            new Process(4, 4, 1)
         };
 
         int completed = 0, time = 0, minRt, shortest = -1;

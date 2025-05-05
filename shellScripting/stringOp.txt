@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "Enter a string:"
+read str
+
+echo "Length of the string is: ${#str}"
+upper=$(echo "$str" | tr 'a-z' 'A-Z')
+echo "Uppercase: $upper"
+lower=$(echo "$str" | tr 'A-Z' 'a-z')
+echo "Lowercase: $lower"
+rev=$(echo "$str" | rev)
+echo "Reversed string: $rev"
+sub=${str:0:3}
+echo "First 3 characters: $sub"
