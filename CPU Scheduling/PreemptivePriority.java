@@ -27,7 +27,7 @@ public class PreemptivePriority {
         boolean found;
         int totalWT = 0, totalTAT = 0;
 
-        // List for Gantt Chart Representation
+        
         List<Integer> ganttChart = new ArrayList<>();
         List<Integer> timeStamps = new ArrayList<>();
         timeStamps.add(0);
@@ -36,7 +36,7 @@ public class PreemptivePriority {
             minPriority = Integer.MAX_VALUE;
             found = false;
 
-            // Check which process with highest priority is ready to execute
+            
             for (int i = 0; i < n; i++) {
                 if (processes[i].at <= time && processes[i].rt > 0 && processes[i].priority < minPriority) {
                     minPriority = processes[i].priority;
@@ -45,23 +45,23 @@ public class PreemptivePriority {
                 }
             }
 
-            // If no process is found, increment time
+            
             if (!found) {
                 time++;
                 continue;
             }
 
-            // If a new process is scheduled, add to Gantt chart
+           
             if (ganttChart.isEmpty() || ganttChart.get(ganttChart.size() - 1) != processes[highestPriorityIdx].pid) {
                 ganttChart.add(processes[highestPriorityIdx].pid);
                 timeStamps.add(time);
             }
 
-            // Execute the process for one time unit
+            
             processes[highestPriorityIdx].rt--;
             time++;
 
-            // If process finishes execution
+            
             if (processes[highestPriorityIdx].rt == 0) {
                 completed++;
                 processes[highestPriorityIdx].ct = time;
@@ -75,7 +75,7 @@ public class PreemptivePriority {
 
         timeStamps.add(time);
 
-        // Print Gantt Chart
+        
         System.out.println("\nGantt Chart:");
         for (int i = 0; i < ganttChart.size(); i++) {
             System.out.print(" ----");
@@ -104,7 +104,7 @@ public class PreemptivePriority {
             System.out.println("P" + p.pid + "\t" + p.at + "\t" + p.bt + "\t" + p.priority + "\t\t" + p.ct + "\t" + p.tat + "\t" + p.wt);
         }
 
-        // Calculate and print average Turnaround Time and Waiting Time
+        
         System.out.printf("\nAverage Turnaround Time: %.2f", (totalTAT / (float) n));
         System.out.printf("\nAverage Waiting Time: %.2f\n", (totalWT / (float) n));
     }

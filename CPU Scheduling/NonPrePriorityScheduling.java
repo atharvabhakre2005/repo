@@ -15,11 +15,11 @@ public class NonPrePriorityScheduling {
     public static void main(String[] args) {
         int n = 5;
         Process[] processes = {
-            new Process(1, 0, 10, 3),
-            new Process(2, 0, 1, 1),
-            new Process(3, 0, 2, 4),
-            new Process(4, 0, 1, 5),
-            new Process(5, 0, 5, 2)
+            new Process(1, 0, 3, 3),
+            new Process(2, 1, 6, 4),
+            new Process(3, 3, 1, 9),
+            new Process(4, 2, 2, 7),
+            new Process(5, 4, 4, 8)
         };
 
         Arrays.sort(processes, Comparator.comparingInt(p -> p.at));
