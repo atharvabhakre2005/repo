@@ -1,20 +1,47 @@
 #!/bin/bash
 
-# Input marks
-echo "Enter marks (0–100):"
+echo "===== Arithmetic Operations ====="
+echo "Enter first number:"
+read num1
+echo "Enter second number:"
+read num2
+
+sum=$((num1 + num2))
+diff=$((num1 - num2))
+prod=$((num1 * num2))
+
+# Avoid division by zero
+if [ "$num2" -ne 0 ]; then
+  div=$((num1 / num2))
+  mod=$((num1 % num2))
+else
+  div="Undefined (division by zero)"
+  mod="Undefined (modulus by zero)"
+fi
+
+echo "Addition: $sum"
+echo "Subtraction: $diff"
+echo "Multiplication: $prod"
+echo "Division: $div"
+echo "Modulus: $mod"
+
+echo ""
+echo "===== Grading System ====="
+echo "Enter marks out of 100:"
 read marks
 
-# Check grade using conditions
-if [ $marks -ge 90 ]; then
-    echo "Grade: A+"
-elif [ $marks -ge 80 ]; then
-    echo "Grade: A"
-elif [ $marks -ge 70 ]; then
-    echo "Grade: B"
-elif [ $marks -ge 60 ]; then
-    echo "Grade: C"
-elif [ $marks -ge 50 ]; then
-    echo "Grade: D"
+if [ "$marks" -ge 90 ]; then
+  grade="A+"
+elif [ "$marks" -ge 80 ]; then
+  grade="A"
+elif [ "$marks" -ge 70 ]; then
+  grade="B"
+elif [ "$marks" -ge 60 ]; then
+  grade="C"
+elif [ "$marks" -ge 50 ]; then
+  grade="D"
 else
-    echo "Grade: F (Fail)"
+  grade="F (Fail)"
 fi
+
+echo "Grade: $grade"

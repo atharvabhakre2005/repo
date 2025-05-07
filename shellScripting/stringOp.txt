@@ -1,14 +1,69 @@
 #!/bin/bash
 
-echo "Enter a string:"
-read str
+echo "Enter the first string:"
+read str1
 
-echo "Length of the string is: ${#str}"
-upper=$(echo "$str" | tr 'a-z' 'A-Z')
-echo "Uppercase: $upper"
-lower=$(echo "$str" | tr 'A-Z' 'a-z')
-echo "Lowercase: $lower"
-rev=$(echo "$str" | rev)
-echo "Reversed string: $rev"
-sub=${str:0:3}
-echo "First 3 characters: $sub"
+echo "Enter the second string:"
+read str2
+
+while true; do
+    echo
+    echo "Choose a string operation:"
+    echo "1. Length of strings"
+    echo "2. Compare strings"
+    echo "3. Concatenate strings"
+    echo "4. Substring extraction (from str1)"
+    echo "5. Reverse string (str1)"
+    echo "6. Count vowels in str1"
+    echo "7. Convert str1 to uppercase"
+    echo "8. Convert str1 to lowercase"
+    echo "9. Exit"
+    read -p "Enter your choice: " choice
+
+    case $choice in
+        1)
+            echo "Length of str1: ${#str1}"
+            echo "Length of str2: ${#str2}"
+            ;;
+        2)
+            if [ "$str1" = "$str2" ]; then
+                echo "Strings are equal"
+            else
+                echo "Strings are NOT equal"
+            fi
+            ;;
+        3)
+            concat="$str1$str2"
+            echo "Concatenated string: $concat"
+            ;;
+        4)
+            read -p "Enter starting index: " start
+            read -p "Enter length: " len
+            substr=${str1:$start:$len}
+            echo "Substring: $substr"
+            ;;
+        5)
+            revstr=$(echo "$str1" | rev)
+            echo "Reversed str1: $revstr"
+            ;;
+        6)
+            count=$(echo "$str1" | grep -o -i "[aeiou]" | wc -l)
+            echo "Number of vowels in str1: $count"
+            ;;
+        7)
+            upper=$(echo "$str1" | tr '[:lower:]' '[:upper:]')
+            echo "Uppercase str1: $upper"
+            ;;
+        8)
+            lower=$(echo "$str1" | tr '[:upper:]' '[:lower:]')
+            echo "Lowercase str1: $lower"
+            ;;
+        9)
+            echo "Exiting..."
+            break
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            ;;
+    esac
+done
