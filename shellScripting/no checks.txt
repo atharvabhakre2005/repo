@@ -18,22 +18,30 @@ else
 fi
 
 # ---------- Prime Check ----------
-is_prime=1
-if [ $num -le 1 ]; then
-    is_prime=0
-else
-    for ((i=2; i*i<=num; i++)); do
-        if [ $((num % i)) -eq 0 ]; then
-            is_prime=0
-            break
-        fi
-    done
+
+if [ "$num" -le 1 ]; then
+  echo "The number $num is not prime"
+  exit 0
 fi
-if [ $is_prime -eq 1 ]; then
-    echo "$num is a Prime number."
+
+sqr=$(echo "scale=0; sqrt($num)" | bc)
+isPrime=1
+
+for (( i=2; i<=sqr; i++ ))
+do
+  if (( num % i == 0 )); then
+    isPrime=0
+    break
+  fi
+done
+
+if [ $isPrime -eq 0 ]; then
+  echo "The number $num is not prime"
 else
-    echo "$num is NOT a Prime number."
+  echo "The number $num is prime"
 fi
+
+
 
 # ---------- Fibonacci Series ----------
 echo "Fibonacci series up to $num terms:"

@@ -46,7 +46,10 @@ public class LRU {
             }
             ctime++;
         }
-        System.out.println("The number of page faults is : " + cnt);
+        int hits = len - cnt;
+    System.out.println("The number of page faults is: " + cnt);
+    System.out.println("The number of page hits is: " + hits);
+        
     }
 }
 

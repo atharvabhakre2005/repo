@@ -30,8 +30,12 @@ public class fifo {
 	}
 
 	public static void main(String args[]) {
-		int pages[] = {1,2,3,1,2,5,6,1,4};
+		int pages[] = {7,0,1,2,0,3,0,4,2,3,0,3,1,2,0};
 		int capacity = 3;
-		System.out.println("the no page faults are: "+pageFaults(pages, pages.length, capacity));
+		int faults = pageFaults(pages, pages.length, capacity);
+		int hits = pages.length - faults;
+		System.out.println("The number of page faults is: " + faults);
+		System.out.println("The number of page hits is: " + hits);
 	}
+	
 }

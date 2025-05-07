@@ -1,20 +1,7 @@
-//secondChoice
 import java.util.*;
 import java.io.*;
 
 public class secondChance {
-    public static void main(String args[]) throws IOException {
-        String reference_string = "";
-        int frames = 0;
-
-        reference_string = "0 4 1 4 2 4 3 4 2 4 0 4 1 4 2 4 3 4";
-        frames = 3;
-        printHitsAndFaults(reference_string, frames);
-
-        reference_string = "2 5 10 1 2 2 6 9 1 2 10 2 6 1 2 1 6 9 5 1";
-        frames = 4;
-        printHitsAndFaults(reference_string, frames);
-    }
 
     static boolean findAndUpdate(int x, int arr[], boolean second_chance[], int frames) {
         int i;
@@ -39,9 +26,10 @@ public class secondChance {
     }
 
     static void printHitsAndFaults(String reference_string, int frames) {
-        int pointer, i, l, x, pf;
+        int pointer, i, l, x, pf, hits;
         pointer = 0;
         pf = 0;
+        hits = 0;
         int arr[] = new int[frames];
         Arrays.fill(arr, -1);
         boolean second_chance[] = new boolean[frames];
@@ -50,11 +38,21 @@ public class secondChance {
 
         for (i = 0; i < l; i++) {
             x = Integer.parseInt(str[i]);
-            if (!findAndUpdate(x, arr, second_chance, frames)) {
+            if (findAndUpdate(x, arr, second_chance, frames)) {
+                hits++;
+            } else {
                 pointer = replaceAndUpdate(x, arr, second_chance, frames, pointer);
                 pf++;
             }
         }
-        System.out.println("Total page faults were " + pf);
+
+        System.out.println("Total page faults were: " + pf);
+        System.out.println("Total page hits were: " + hits);
+    }
+
+    public static void main(String args[]) throws IOException {
+        String reference_string = "0 4 1 4 2 4 3 4 2 4 0 4 1 4 2 4 3 4";
+        int frames = 3;
+        printHitsAndFaults(reference_string, frames);
     }
 }
