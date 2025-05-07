@@ -48,7 +48,7 @@ public class optimal {
     }
 
     public static void main(String[] args) {
-        int pg[] = { 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2 };
+        int pg[] = {7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
         int pn = pg.length;
         int fn = 4;
         optimalPage(pg, pn, fn);

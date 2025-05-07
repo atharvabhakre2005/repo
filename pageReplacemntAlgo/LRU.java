@@ -2,13 +2,7 @@
 import java.util.*;
 
 public class LRU {
-    public static void main(String[] args) {
-        int[] ref = {1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5};
-        int len = ref.length;
-        int frame_size = 3;
-        int ctime = 0;
-        pageFaults(frame_size, ref, len, ctime);
-    }
+
 
     public static void pageFaults(int frame_size, int[] ref, int len, int ctime) {
         int cnt = 0;
@@ -50,6 +44,13 @@ public class LRU {
     System.out.println("The number of page faults is: " + cnt);
     System.out.println("The number of page hits is: " + hits);
         
+    }
+    public static void main(String[] args) {
+        int[] ref = {7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
+        int len = ref.length;
+        int frame_size = 4;
+        int ctime = 0;
+        pageFaults(frame_size, ref, len, ctime);
     }
 }
 
