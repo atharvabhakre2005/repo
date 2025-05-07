@@ -1,3 +1,4 @@
+//FCFS DiskSche
 public class FCFSAlgo
 {
 static int size = 8;

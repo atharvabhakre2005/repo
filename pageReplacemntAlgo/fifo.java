@@ -1,3 +1,4 @@
+///fifo
 import java.util.*;
 
 public class fifo {

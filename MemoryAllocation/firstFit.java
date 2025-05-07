@@ -1,4 +1,4 @@
-import java.util.*;
+//firstFit
 public class firstFit 
 {
     static void firstfit(int blockSize[], int m, 

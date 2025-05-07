@@ -1,3 +1,4 @@
+//worstfit
 public class WorstFIt
 { 
     static void worstFit(int blockSize[], int m, int processSize[], int n) 

@@ -1,3 +1,4 @@
+//SSTF
 class node {
     int distance = 0; 
     boolean accessed = false; 

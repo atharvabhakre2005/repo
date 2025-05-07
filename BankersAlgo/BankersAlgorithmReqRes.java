@@ -1,3 +1,4 @@
+//BankersAlgorithmReqRes
 public class BankersAlgorithmReqRes {
     static int P = 5;
     static int R = 3;

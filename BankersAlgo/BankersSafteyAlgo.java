@@ -1,3 +1,4 @@
+//BankersSafteyAlgo
 public class BankersSafteyAlgo {
 
     static int P = 5;
@@ -46,7 +47,8 @@ public class BankersSafteyAlgo {
 
         System.out.print("System is in safe state.\nSafe sequence is: ");
         for (int i = 0; i < P ; i++)
-            System.out.print(safeSeq[i] + " ");
+        System.out.print("P" + safeSeq[i] + " ");
+
 
         return true;
     }

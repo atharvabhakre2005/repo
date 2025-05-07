@@ -1,3 +1,4 @@
+//FCFS
 import java.util.Arrays;
 
 class Process {

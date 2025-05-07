@@ -1,3 +1,4 @@
+//Optimal
 public class optimal {
 
     static boolean search(int key, int[] fr) {

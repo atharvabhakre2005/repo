@@ -1,21 +1,22 @@
+//cscan
 import java.util.*;
 
 public class Cscan {
-    static int size = 8; // Number of requests
-    static int disk_size = 200; // Maximum disk size
+    static int size = 8;
+    static int disk_size = 200; 
 
     public static void CSCAN(int arr[], int head) {
-        int seek_count = 0; // Initialize seek count
+        int seek_count = 0;
         int distance, cur_track;
 
-        Vector<Integer> left = new Vector<>();
-        Vector<Integer> right = new Vector<>();
-        Vector<Integer> seek_sequence = new Vector<>();
+        List<Integer> left = new ArrayList<Integer>();
+        List<Integer> right = new ArrayList<Integer>();
+        List<Integer> seek_sequence = new ArrayList<Integer>();
 
-        left.add(0); // Add start of the disk
-        right.add(disk_size - 1); // Add end of the disk
+        left.add(0); 
+        right.add(disk_size - 1); 
 
-        // Divide requests in two parts: left and right of the head
+        
         for (int i = 0; i < size; i++) {
             if (arr[i] < head)
                 left.add(arr[i]);
@@ -23,33 +24,33 @@ public class Cscan {
                 right.add(arr[i]);
         }
 
-        // Sort both the vectors
+       
         Collections.sort(left);
         Collections.sort(right);
 
-        // Serve the requests going to the right
+       
         for (int i = 0; i < right.size(); i++) {
             cur_track = right.get(i);
-            seek_sequence.add(cur_track); // Add to seek sequence
+            seek_sequence.add(cur_track); 
             distance = Math.abs(cur_track - head);
-            seek_count += distance; // Update seek count
-            head = cur_track; // Move head to current track
+            seek_count += distance;
+            head = cur_track; 
         }
 
-        // Jump to the beginning of the disk
+       
         head = 0;
-        seek_count += (disk_size - 1); // Add distance for jump
+        seek_count += (disk_size - 1); 
 
-        // Serve the requests going to the left
+        
         for (int i = 0; i < left.size(); i++) {
             cur_track = left.get(i);
-            seek_sequence.add(cur_track); // Add to seek sequence
+            seek_sequence.add(cur_track);
             distance = Math.abs(cur_track - head);
-            seek_count += distance; // Update seek count
-            head = cur_track; // Move head to current track
+            seek_count += distance;
+            head = cur_track; 
         }
 
-        // Print total seek operations and the seek sequence
+        
         System.out.println("Total number of seek operations = " + seek_count);
         System.out.println("Seek Sequence is");
         for (int i = 0; i < seek_sequence.size(); i++) {
@@ -58,10 +59,10 @@ public class Cscan {
     }
 
     public static void main(String[] args) {
-        int arr[] = {176, 79, 34, 60, 92, 11, 41, 114}; // Requests
-        int head = 50; // Initial head position
+        int arr[] = {176, 79, 34, 60, 92, 11, 41, 114}; 
+        int head = 50;
 
         System.out.println("Initial position of head: " + head);
-        CSCAN(arr, head); // Call C-SCAN function
+        CSCAN(arr, head);
     }
 }
